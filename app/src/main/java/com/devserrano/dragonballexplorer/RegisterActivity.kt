@@ -1,14 +1,25 @@
 package com.devserrano.dragonballexplorer
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.widget.TextView
+import android.content.Intent
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        val returnlogin = findViewById<TextView>(R.id.tvGoToLogin)
+
+        returnlogin.setOnClickListener {
+            val intent = Intent(
+                this@RegisterActivity,
+                LoginActivity::class.java
+            )
+            startActivity(intent)
+            finish()
+
+        }
     }
 }
