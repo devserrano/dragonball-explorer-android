@@ -10,6 +10,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.devserrano.dragonballexplorer.network.RetrofitInstance
 import com.devserrano.dragonballexplorer.models.CharacterResponse
+import android.widget.EditText
+import android.text.Editable
+import android.text.TextWatcher
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerCharacters)
+        val etSearch = findViewById<EditText>(R.id.etSearch)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -39,6 +43,35 @@ class MainActivity : AppCompatActivity() {
                             val adapter = CharacterAdapter(characterList)
 
                             recyclerView.adapter = adapter
+
+                            etSearch.addTextChangedListener(object : TextWatcher {
+
+                                override fun beforeTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    count: Int,
+                                    after: Int
+                                ) {
+                                }
+
+                                override fun onTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    before: Int,
+                                    count: Int
+                                ) {
+                                    val query = s.toString().trim()
+
+                                    val filteredList = characterList.filter { character ->
+                                        character.name.contains(query, ignoreCase = true)
+                                    }
+
+                                    adapter.updateList(filteredList)
+                                }
+
+                                override fun afterTextChanged(s: Editable?) {
+                                }
+                            })
                         }
 
                     }

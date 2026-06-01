@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 
 interface ApiService {
-    @GET("characters")
+    @GET("characters?limit=100")
     fun getCharacters(): Call<CharacterResponse>
 
 }

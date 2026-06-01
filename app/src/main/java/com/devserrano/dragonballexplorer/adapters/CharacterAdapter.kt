@@ -11,7 +11,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 class CharacterAdapter(
-    private val characterList: List<DragonBallCharacter>
+    private var characterList: List<DragonBallCharacter>
 ) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     inner class CharacterViewHolder(itemView: View) :
@@ -52,8 +52,14 @@ class CharacterAdapter(
 
     }
 
+
     override fun getItemCount(): Int {
 
         return characterList.size
+    }
+
+    fun updateList(newList: List<DragonBallCharacter>) {
+        characterList = newList
+        notifyDataSetChanged()
     }
 }
