@@ -1,11 +1,15 @@
 package com.devserrano.dragonballexplorer
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devserrano.dragonballexplorer.adapters.CharacterAdapter
-import com.devserrano.dragonballexplorer.models.DragonBallCharacter
+import android.util.Log
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.devserrano.dragonballexplorer.network.RetrofitInstance
+import com.devserrano.dragonballexplorer.models.CharacterResponse
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,30 +22,40 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val characterList = listOf(
+        RetrofitInstance.api.getCharacters()
+            .enqueue(object : Callback<CharacterResponse> {
 
-            DragonBallCharacter(
+                override fun onResponse(
+                    call: Call<CharacterResponse>,
+                    response: Response<CharacterResponse>
+                ) {
 
-                "Goku",
-                "Saiyan",
-                "9000",
-                ""
-            ),
-            DragonBallCharacter(
-                "Vegeta",
-                "Saiyan",
-                "8500",
-                ""
-            ),
-            DragonBallCharacter(
-                "Freezer",
-                "Frieza Race",
-                "12000",
-                ""
-            )
-        )
-        val adapter = CharacterAdapter(characterList)
+                    if (response.isSuccessful) {
 
-        recyclerView.adapter = adapter
+                        val characterList = response.body()?.items
+
+                        if (characterList != null) {
+
+                            val adapter = CharacterAdapter(characterList)
+
+                            recyclerView.adapter = adapter
+                        }
+
+                    }
+
+                }
+
+                override fun onFailure(
+                    call: Call<CharacterResponse>,
+                    t: Throwable
+                ) {
+
+                    Log.e("API_ERROR", t.message.toString())
+
+                }
+
+
+            })
+
     }
 }

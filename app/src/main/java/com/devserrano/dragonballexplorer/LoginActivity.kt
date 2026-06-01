@@ -11,30 +11,30 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val registerText =  findViewById<TextView>(R.id.tvRegister)
+        val registerText = findViewById<TextView>(R.id.tvRegister)
 
         registerText.setOnClickListener {
             val intent = Intent(
                 this@LoginActivity,
-                RegisterActivity::class.java)
+                RegisterActivity::class.java
+            )
 
-                startActivity(intent)
+            startActivity(intent)
 
         }
 
         val loginBtn = findViewById<Button>(R.id.btnLogin)
 
-           loginBtn.setOnClickListener {
-               val intent = Intent (
-                   this@LoginActivity,
-                   MainActivity::class.java)
+        loginBtn.setOnClickListener {
+            val intent = Intent(
+                this@LoginActivity,
+                MainActivity::class.java
+            )
 
-               startActivity(intent)
-               finish()
+            startActivity(intent)
+            finish()
 
-           }
-
-
+        }
+    }
 
     }
-}
