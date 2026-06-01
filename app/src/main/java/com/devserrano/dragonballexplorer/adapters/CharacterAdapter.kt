@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devserrano.dragonballexplorer.R
 import com.devserrano.dragonballexplorer.models.DragonBallCharacter
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 
 class CharacterAdapter(
     private val characterList: List<DragonBallCharacter>
@@ -17,6 +19,7 @@ class CharacterAdapter(
         val tvName = itemView.findViewById<TextView>(R.id.tvName)
         val tvRace = itemView.findViewById<TextView>(R.id.tvRace)
         val tvKi = itemView.findViewById<TextView>(R.id.tvKi)
+        val imgCharacter = itemView.findViewById<ImageView>(R.id.imgCharacter)
     }
 
     override fun onCreateViewHolder(
@@ -36,11 +39,16 @@ class CharacterAdapter(
     ) {
         val character = characterList[position]
 
+
         holder.tvName.text = character.name
 
         holder.tvRace.text = character.race
 
         holder.tvKi.text = "Ki: ${character.ki}"
+
+        Glide.with(holder.itemView.context)
+            .load(character.image)
+            .into(holder.imgCharacter)
 
     }
 

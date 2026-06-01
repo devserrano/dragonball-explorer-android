@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654650462854",
+    "project_id": "dragonballexplorer-b9c9a",
+    "storage_bucket": "dragonballexplorer-b9c9a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654650462854:android:293cc0153def48ba407707",
+        "android_client_info": {
+          "package_name": "com.devserrano.dragonballexplorer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdH7IFH9gfNXHs5kobAO9Uen9HrFWzw8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
