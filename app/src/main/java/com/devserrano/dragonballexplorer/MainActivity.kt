@@ -13,6 +13,9 @@ import com.devserrano.dragonballexplorer.models.CharacterResponse
 import android.widget.EditText
 import android.text.Editable
 import android.text.TextWatcher
+import android.content.Intent
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +26,20 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerCharacters)
         val etSearch = findViewById<EditText>(R.id.etSearch)
+        val btnLogout = findViewById<TextView>(R.id.btnLogout)
+
+        btnLogout.setOnClickListener {
+
+            FirebaseAuth.getInstance().signOut()
+
+            val intent = Intent(
+                this@MainActivity,
+                LoginActivity::class.java
+            )
+
+            startActivity(intent)
+            finish()
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -86,6 +103,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e("API_ERROR", t.message.toString())
 
                 }
+
 
 
             })
