@@ -9,6 +9,8 @@ import com.devserrano.dragonballexplorer.R
 import com.devserrano.dragonballexplorer.models.DragonBallCharacter
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import android.content.Intent
+import com.devserrano.dragonballexplorer.CharacterDetailActivity
 
 class CharacterAdapter(
     private var characterList: List<DragonBallCharacter>
@@ -49,6 +51,23 @@ class CharacterAdapter(
         Glide.with(holder.itemView.context)
             .load(character.image)
             .into(holder.imgCharacter)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(
+                holder.itemView.context,
+                CharacterDetailActivity::class.java
+            )
+
+            intent.putExtra("name", character.name)
+            intent.putExtra("race", character.race)
+            intent.putExtra("ki", character.ki)
+            intent.putExtra("image", character.image)
+            intent.putExtra("maxKi", character.maxKi)
+            intent.putExtra("gender", character.gender)
+            intent.putExtra("affiliation", character.affiliation)
+            intent.putExtra("description", character.description)
+
+            holder.itemView.context.startActivity(intent)
+        }
 
     }
 
