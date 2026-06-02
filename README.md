@@ -36,7 +36,7 @@ Aplicación Android desarrollada en Kotlin que consume la Dragon Ball API para e
 
 ### Lista de Personajes
 
-![Lista](screenshots/main.jpeg)
+![Lista](screenshots/characters.jpeg)
 
 ### Detalle del Personaje
 
