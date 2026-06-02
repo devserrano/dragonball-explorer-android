@@ -16,6 +16,7 @@ import android.text.TextWatcher
 import android.content.Intent
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -101,6 +102,15 @@ class MainActivity : AppCompatActivity() {
                 ) {
 
                     Log.e("API_ERROR", t.message.toString())
+                    Toast.makeText(
+
+                        this@MainActivity,
+
+                        "Error al cargar personajes. Revisa tu conexión.",
+
+                        Toast.LENGTH_LONG
+
+                    ).show()
 
                 }
 
