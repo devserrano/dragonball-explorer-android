@@ -105,6 +105,15 @@
             android:textStyle="bold"
             android:backgroundTint="#FF9800"
             android:layout_marginTop="36dp" />
+        <Button
+            android:id="@+id/btnAddFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Agregar a favoritos"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:backgroundTint="#FF9800"
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

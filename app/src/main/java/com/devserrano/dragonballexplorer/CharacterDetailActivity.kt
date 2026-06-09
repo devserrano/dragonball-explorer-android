@@ -6,7 +6,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import com.devserrano.dragonballexplorer.database.DatabaseProvider
+import com.devserrano.dragonballexplorer.database.FavoriteCharacter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 class CharacterDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +29,8 @@ class CharacterDetailActivity : AppCompatActivity() {
         val tvGenderDetail = findViewById<TextView>(R.id.tvGenderDetail)
         val tvAffiliationDetail = findViewById<TextView>(R.id.tvAffiliationDetail)
         val tvDescriptionDetail = findViewById<TextView>(R.id.tvDescriptionDetail)
+        val btnAddFavorite = findViewById<Button>(R.id.btnAddFavorite)
+        val id = intent.getIntExtra("id", 0)
 
         val name = intent.getStringExtra("name")
         val race = intent.getStringExtra("race")
@@ -44,6 +52,40 @@ class CharacterDetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(image)
             .into(imgCharacterDetail)
+
+        btnAddFavorite.setOnClickListener {
+
+            val favorite = FavoriteCharacter(
+                id,
+                name ?: "",
+                race ?: "",
+                ki ?: "",
+                image ?: "",
+                ""
+            )
+
+            lifecycleScope.launch {
+
+                withContext(Dispatchers.IO) {
+
+                    val database = DatabaseProvider.getDatabase(this@CharacterDetailActivity)
+
+                    database.favoriteCharacterDao().insertFavorite(favorite)
+
+                }
+
+                Toast.makeText(
+
+                    this@CharacterDetailActivity,
+
+                    "Agregado a favoritos",
+
+                    Toast.LENGTH_SHORT
+
+                ).show()
+
+            }
+        }
 
         btnBackDetail.setOnClickListener {
             finish()

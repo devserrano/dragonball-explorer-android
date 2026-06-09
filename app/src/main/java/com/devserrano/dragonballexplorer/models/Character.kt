@@ -1,6 +1,7 @@
 package com.devserrano.dragonballexplorer.models
 
 data class DragonBallCharacter(
+    val id: Int,
     val name: String,
     val race: String,
     val ki: String,

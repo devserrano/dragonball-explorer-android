@@ -22,6 +22,7 @@ class CharacterAdapter(
         val tvRace = itemView.findViewById<TextView>(R.id.tvRace)
         val tvKi = itemView.findViewById<TextView>(R.id.tvKi)
         val imgCharacter = itemView.findViewById<ImageView>(R.id.imgCharacter)
+
     }
 
     override fun onCreateViewHolder(
@@ -65,6 +66,7 @@ class CharacterAdapter(
             intent.putExtra("gender", character.gender)
             intent.putExtra("affiliation", character.affiliation)
             intent.putExtra("description", character.description)
+            intent.putExtra("id", character.id)
 
             holder.itemView.context.startActivity(intent)
         }

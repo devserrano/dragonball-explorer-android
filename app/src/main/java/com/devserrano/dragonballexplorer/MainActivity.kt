@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerCharacters)
         val etSearch = findViewById<EditText>(R.id.etSearch)
         val btnLogout = findViewById<TextView>(R.id.btnLogout)
+        val navFavorites = findViewById<TextView>(R.id.navFavorites)
 
         btnLogout.setOnClickListener {
 
@@ -40,6 +41,15 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
             finish()
+        }
+        navFavorites.setOnClickListener {
+            val intent = Intent(
+                this@MainActivity,
+                FavoritesActivity::class.java
+            )
+
+            startActivity(intent)
+
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
