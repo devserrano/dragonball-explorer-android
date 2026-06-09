@@ -12,7 +12,8 @@ import com.devserrano.dragonballexplorer.database.FavoriteCharacter
 
 class FavoriteAdapter(
     private var favoriteList: List<FavoriteCharacter>,
-    private val onDeleteClick: (FavoriteCharacter) -> Unit
+    private val onDeleteClick: (FavoriteCharacter) -> Unit,
+    private val onEditClick: (FavoriteCharacter) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     inner class FavoriteViewHolder(itemView: View) :
@@ -23,6 +24,11 @@ class FavoriteAdapter(
         val tvRace = itemView.findViewById<TextView>(R.id.tvRace)
         val tvKi = itemView.findViewById<TextView>(R.id.tvKi)
         val btnDeleteFavorite = itemView.findViewById<TextView>(R.id.btnDeleteFavorite)
+        val tvNote =
+            itemView.findViewById<TextView>(R.id.tvNote)
+
+        val btnEditNote =
+            itemView.findViewById<TextView>(R.id.btnEditNote)
 
     }
 
@@ -41,6 +47,7 @@ class FavoriteAdapter(
         holder.tvName.text = favorite.name
         holder.tvRace.text = favorite.race
         holder.tvKi.text = "Ki: ${favorite.ki}"
+        holder.tvNote.text ="Nota: ${favorite.note}"
 
         Glide.with(holder.itemView.context)
             .load(favorite.image)
@@ -48,6 +55,9 @@ class FavoriteAdapter(
 
         holder.btnDeleteFavorite.setOnClickListener {
             onDeleteClick(favorite)
+        }
+        holder.btnEditNote.setOnClickListener {
+            onEditClick(favorite)
         }
     }
 

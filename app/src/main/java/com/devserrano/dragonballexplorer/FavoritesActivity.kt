@@ -13,6 +13,9 @@ import com.devserrano.dragonballexplorer.database.DatabaseProvider
 import com.devserrano.dragonballexplorer.database.FavoriteCharacter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import android.app.AlertDialog
+
+import android.widget.EditText
 
 
 class FavoritesActivity : AppCompatActivity() {
@@ -40,26 +43,60 @@ class FavoritesActivity : AppCompatActivity() {
         lateinit var adapter: FavoriteAdapter
 
         adapter = FavoriteAdapter(
-            emptyList<FavoriteCharacter>()
-        ) { favorite ->
+            emptyList<FavoriteCharacter>(),
+            onDeleteClick = { favorite ->
 
-            lifecycleScope.launch {
+                lifecycleScope.launch {
 
-                val updatedFavorites = withContext(Dispatchers.IO) {
+                    val updatedFavorites = withContext(Dispatchers.IO) {
 
-                    val database =
-                        DatabaseProvider.getDatabase(this@FavoritesActivity)
+                        val database =
+                            DatabaseProvider.getDatabase(this@FavoritesActivity)
 
-                    database.favoriteCharacterDao()
-                        .deleteFavorite(favorite)
+                        database.favoriteCharacterDao()
+                            .deleteFavorite(favorite)
 
-                    database.favoriteCharacterDao()
-                        .getAllFavorites()
+                        database.favoriteCharacterDao()
+                            .getAllFavorites()
+                    }
+
+                    adapter.updateList(updatedFavorites)
                 }
+            },
+            onEditClick = { favorite ->
 
-                adapter.updateList(updatedFavorites)
+                val input = EditText(this@FavoritesActivity)
+                input.setText(favorite.note)
+                input.hint = "Escribe una nota"
+
+                AlertDialog.Builder(this@FavoritesActivity)
+                    .setTitle("Editar nota")
+                    .setView(input)
+                    .setPositiveButton("Guardar") { _, _ ->
+
+                        favorite.note = input.text.toString()
+
+                        lifecycleScope.launch {
+
+                            val updatedFavorites = withContext(Dispatchers.IO) {
+
+                                val database =
+                                    DatabaseProvider.getDatabase(this@FavoritesActivity)
+
+                                database.favoriteCharacterDao()
+                                    .updateFavorite(favorite)
+
+                                database.favoriteCharacterDao()
+                                    .getAllFavorites()
+                            }
+
+                            adapter.updateList(updatedFavorites)
+                        }
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
             }
-        }
+        )
 
         recyclerFavorites.adapter = adapter
 

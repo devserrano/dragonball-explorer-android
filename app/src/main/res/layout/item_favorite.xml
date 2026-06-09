@@ -67,6 +67,23 @@
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"/>
             <TextView
+                android:id="@+id/tvNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nota: Sin nota"
+                android:textColor="#BBBBBB"
+                android:textSize="14sp"
+                android:layout_marginTop="6dp"/>
+            <TextView
+                android:id="@+id/btnEditNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar nota"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:layout_marginTop="6dp"/>
+            <TextView
                 android:id="@+id/btnDeleteFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

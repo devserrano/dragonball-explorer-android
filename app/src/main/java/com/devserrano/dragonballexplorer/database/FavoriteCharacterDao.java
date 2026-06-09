@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface FavoriteCharacterDao {
 
     @Delete
     void deleteFavorite(FavoriteCharacter favoriteCharacter);
+    @Update
+    void updateFavorite(FavoriteCharacter favoriteCharacter);
 }
